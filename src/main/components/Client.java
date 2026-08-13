@@ -8,7 +8,7 @@ public class Client {
 
     static private int clientCount = 0;
 
-    Client(String name, String firstName) {
+    public Client(String name, String firstName) {
         this.name = name;
         this.firstName = firstName;
         this.clientNumber = Client.clientCount;
