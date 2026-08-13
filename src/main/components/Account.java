@@ -7,7 +7,7 @@ public abstract class Account {
     protected Integer accountNumber;
     protected Client client;
 
-    static private Integer accountsCount;
+    static private Integer accountsCount = 0;
 
     public Account(String label, Client client) {
         this.label = label;
@@ -51,9 +51,9 @@ public abstract class Account {
 
     @Override
     public String toString() {
-        return "Account n°" + this.accountNumber + "\n" 
-            + "Label: " + this.label + "\n" 
-            + "Client: " + this.client + "\n" 
+        return "Account n°" + this.accountNumber + " = " 
+            + "Label: " + this.label + ", " 
+            + "Client: " + this.client + ", " 
             + "Balance: " + this.balance;
     }
 }
