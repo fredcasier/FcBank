@@ -1,18 +1,18 @@
 package main.components;
 
- // 1.1.1 Creation of the client class
+ // 1.1.1 Creation of the Client class
 public class Client {
     private String name;
     private String firstName;
-    private int clientNumber;
+    private Integer clientNumber;
 
-    static private int clientCount = 0;
+    static private Integer clientsCount = 0;
 
     public Client(String name, String firstName) {
         this.name = name;
         this.firstName = firstName;
-        this.clientNumber = Client.clientCount;
-        Client.clientCount++;
+        this.clientNumber = Client.clientsCount;
+        Client.clientsCount++;
     }
 
     public String getName() {
@@ -42,6 +42,6 @@ public class Client {
 
     @Override
     public String toString() {
-        return this.clientNumber + ": " + this.name + " " + this.firstName;
+        return "Client n°" + this.clientNumber + " = " + this.name + " " + this.firstName;
     }
 }

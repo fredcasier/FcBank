@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import main.components.Client;
 
-// 1.1.2 Creation of main class for tests
+// 1.1.2 Creation of Main class for tests
 public class Main {
     static ArrayList<Client> clients;
     public static void main(String[] args) {
