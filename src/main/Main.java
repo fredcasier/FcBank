@@ -4,30 +4,32 @@ import java.util.ArrayList;
 
 import main.components.*;
 
-
 // 1.1.2 Creation of Main class for tests
 // 1.2.3 Creation of the tablea account
 public class Main {
-    static ArrayList<Client> clients;
-    static ArrayList<Account> accounts;
-    public static void main(String[] args) {
-        Main.clients = generateClients(4);
-        displayClient(Main.clients);
 
-        Main.accounts = generateAccounts(Main.clients);
-        displayAccounts(Main.accounts);
+
+    public static void main(String[] args) {
+        ArrayList<Client> clients;
+        ArrayList<Account> accounts;
+
+        clients = generateClients(4);
+        displayClient(clients);
+
+        accounts = generateAccounts(clients);
+        displayAccounts(accounts);
     }
 
-    public static ArrayList<Client> generateClients (int number) {
+    public static ArrayList<Client> generateClients(int number) {
         ArrayList<Client> clients = new ArrayList<>();
         for (int i = 1; i <= number; i++) {
-            Client newClient = new Client("name"+i, "firstName"+i);
+            Client newClient = new Client("name" + i, "firstName" + i);
             clients.add(newClient);
         }
         return clients;
     }
 
-    public static ArrayList<Account> generateAccounts (ArrayList<Client> clients) {
+    public static ArrayList<Account> generateAccounts(ArrayList<Client> clients) {
         ArrayList<Account> accounts = new ArrayList<>();
         for (Client client : clients) {
             Account newCurrentAccount = new CurrentAccount("Current", client);
