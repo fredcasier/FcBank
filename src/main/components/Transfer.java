@@ -1,13 +1,13 @@
 package main.components;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 // 1.3.3 Creation of the Transfert, Credit, Debit classes
 public class Transfer extends Flow {
 
     private Integer transferingAccountNumber;
 
-    public Transfer(String comment, Double amount, Integer targetAccountNumber, Integer transferingAccountNumber, Boolean effect, Date flowDate) {
+    public Transfer(String comment, Double amount, Integer targetAccountNumber, Integer transferingAccountNumber, Boolean effect, LocalDate flowDate) {
         super(comment, amount, targetAccountNumber, effect, flowDate);
         this.transferingAccountNumber = transferingAccountNumber;
     }
