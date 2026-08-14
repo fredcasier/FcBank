@@ -11,13 +11,17 @@ public abstract class Flow {
     private Boolean effect;
     private Date flowDate;
 
-    public Flow(String comment, Integer identifier, Double amount, Integer targetAccountNumber, Boolean effect, Date flowDate) {
+    private static Integer flowCount = 0;
+
+    public Flow(String comment, Double amount, Integer targetAccountNumber, Boolean effect, Date flowDate) {
         this.comment = comment;
-        this.identifier = identifier;
+        this.identifier = Flow.flowCount;
         this.amount = amount;
         this.targetAccountNumber = targetAccountNumber;
         this.effect = effect;
         this.flowDate = flowDate;
+
+        Flow.flowCount++;
     }
 
     public String getComment() {
