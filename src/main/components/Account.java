@@ -41,12 +41,19 @@ public abstract class Account {
         this.label = label;
     }
 
+
+    // 1.3.5 Updating accounts
     public void setBalance(Flow flow) {
-        if ((flow instanceof Credit || flow instanceof Transfer) && flow.getTargetAccountNumber() == this.accountNumber) {
+        if (flow instanceof Credit) {
             this.balance += flow.getAmount();
-        }
-        if ((flow instanceof Debit && flow.getTargetAccountNumber() == this.accountNumber || flow instanceof Transfer && ((Transfer)flow).getTransferingAccountNumber() == this.accountNumber)) {
+        } else if (flow instanceof Debit) {
             this.balance -= flow.getAmount();
+        } else if (flow instanceof Transfer) {
+            if (flow.getTargetAccountNumber() == this.accountNumber) {
+                this.balance += flow.getAmount();
+            } else if (((Transfer)flow).getTransferingAccountNumber() == this.accountNumber) {
+                this.balance -= flow.getAmount();
+            }
         }
     }
 
