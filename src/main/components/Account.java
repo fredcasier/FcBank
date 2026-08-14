@@ -42,7 +42,12 @@ public abstract class Account {
     }
 
     public void setBalance(Flow flow) {
-        this.balance += flow.getAmount();
+        if ((flow instanceof Credit || flow instanceof Transfer) && flow.getTargetAccountNumber() == this.accountNumber) {
+            this.balance += flow.getAmount();
+        }
+        if ((flow instanceof Debit && flow.getTargetAccountNumber() == this.accountNumber || flow instanceof Transfer && ((Transfer)flow).getTransferingAccountNumber() == this.accountNumber)) {
+            this.balance -= flow.getAmount();
+        }
     }
 
     public void setAccountNumber(Integer accountNumber) {
