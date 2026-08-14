@@ -40,14 +40,10 @@ public class Main {
     }
 
     public static void displayClient(ArrayList<Client> clients) {
-        for (Client client : clients) {
-            System.out.println(client);
-        }
+        clients.stream().forEach(System.out::println);
     }
 
     public static void displayAccounts(ArrayList<Account> accounts) {
-        for (Account account : accounts) {
-            System.out.println(account);
-        }
+        accounts.stream().forEach(System.out::println);
     }
 }
