@@ -6,7 +6,7 @@ public class Client {
     private String firstName;
     private Integer clientNumber;
 
-    static private Integer clientsCount = 0;
+    static private Integer clientsCount = 1;
 
     public Client(String name, String firstName) {
         this.name = name;

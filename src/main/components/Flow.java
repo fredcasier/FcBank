@@ -11,7 +11,7 @@ public abstract class Flow {
     private Boolean effect;
     private LocalDate flowDate;
 
-    private static Integer flowCount = 0;
+    private static Integer flowCount = 1;
 
     public Flow(String comment, Double amount, Integer targetAccountNumber, Boolean effect, LocalDate flowDate) {
         this.comment = comment;

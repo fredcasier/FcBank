@@ -3,22 +3,24 @@ package main;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 import main.components.*;
 
 public class Main {
-        static private ArrayList<Client> clients;
-        static private ArrayList<Account> accounts;
-        static private Hashtable<Integer, Account> accountsHashtable;
-        static private ArrayList<Flow> flows;
-
-
+    static private ArrayList<Client> clients;
+    static private ArrayList<Account> accounts;
+    static private Hashtable<Integer, Account> accountsHashtable;
+    static private ArrayList<Flow> flows;
 
     public static void main(String[] args) {
 
         clients = generateClients(4);
         accounts = generateAccounts(clients);
         accountsHashtable = genenateAccountHashtable(accounts);
+        flows = generateFlows();
+        updateAccount(flows, accountsHashtable);
 
 
         displayClient(clients);
@@ -79,17 +81,34 @@ public class Main {
         ArrayList<Flow> flows = new ArrayList<>();
         
         flows.add(new Debit("Debit of 50€", 50.0, 1, false, LocalDate.now().plusDays(2)));
-        accounts.stream().forEach((accounts) -> _generateCreditFlow(accounts));
+        accounts.stream().forEach((accounts) -> flows.add(_generateCreditFlow(accounts)));
         flows.add(new Transfer("Transfert of 50€ from 1 to 2", 50.00, 2, 1, false, LocalDate.now().plusDays(2)));
 
         return flows;
     }
 
-    private static void _generateCreditFlow(Account account){
+    private static Credit _generateCreditFlow(Account account){
         if (account instanceof CurrentAccount) {
-            flows.add(new Credit("Credit of 100.50€", 100.50, account.getAccountNumber(), false, LocalDate.now().plusDays(2)));
+            return new Credit("Credit of 100.50€", 100.50, account.getAccountNumber(), false, LocalDate.now().plusDays(2));
         } else if (account instanceof SavingsAccount) {
-            flows.add(new Credit("Credit of 1500€", 1500.00, account.getAccountNumber(), false, LocalDate.now().plusDays(2)));
+            return new Credit("Credit of 1500€", 1500.00, account.getAccountNumber(), false, LocalDate.now().plusDays(2));
+        } else {
+            return null;
         }
+    }
+
+    // 1.3.5 Updating accounts
+    public static void updateAccount(ArrayList<Flow> flows, Hashtable<Integer, Account> accountsHashtable) {
+        for (Flow flow : flows) {
+            accountsHashtable.get(flow.getTargetAccountNumber()).setBalance(flow);
+            if (flow instanceof Transfer) {
+                accountsHashtable.get(((Transfer)flow).getTransferingAccountNumber()).setBalance(flow);
+            }
+        }
+
+        Predicate<Account> hasNegativeBalance = account -> account.getBalance() < 0;
+        Optional<Account> hasNegativeAccount = accountsHashtable.values().stream().filter(hasNegativeBalance).findFirst();
+
+        hasNegativeAccount.ifPresent(account -> System.out.println("There is an account with a negative balance."));
     }
 }

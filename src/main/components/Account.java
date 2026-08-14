@@ -7,7 +7,7 @@ public abstract class Account {
     protected Integer accountNumber;
     protected Client client;
 
-    static private Integer accountsCount = 0;
+    static private Integer accountsCount = 1;
 
     public Account(String label, Client client) {
         this.label = label;
