@@ -6,9 +6,6 @@ import java.util.Hashtable;
 
 import main.components.*;
 
-// 1.1.2 Creation of Main class for tests
-// 1.2.3 Creation of the tablea account
-// 1.3.1 Adaptation of the table of accounts
 public class Main {
         static private ArrayList<Client> clients;
         static private ArrayList<Account> accounts;
@@ -30,6 +27,7 @@ public class Main {
 
     }
 
+    // 1.1.2 Creation of Main class for tests
     public static ArrayList<Client> generateClients(int number) {
         ArrayList<Client> clients = new ArrayList<>();
         for (int i = 1; i <= number; i++) {
@@ -39,6 +37,12 @@ public class Main {
         return clients;
     }
 
+    public static void displayClient(ArrayList<Client> clients) {
+        clients.stream().forEach(System.out::println);
+    }
+
+
+    // 1.2.3 Creation of the tablea account
     public static ArrayList<Account> generateAccounts(ArrayList<Client> clients) {
         ArrayList<Account> accounts = new ArrayList<>();
         for (Client client : clients) {
@@ -51,6 +55,11 @@ public class Main {
         return accounts;
     }
 
+    public static void displayAccounts(ArrayList<Account> accounts) {
+        accounts.stream().forEach(System.out::println);
+    }
+
+    // 1.3.1 Adaptation of the table of accounts
     public static Hashtable<Integer, Account> genenateAccountHashtable(ArrayList<Account> accounts) {
         Hashtable<Integer, Account> accountsHashtable = new Hashtable<>();
         for (Account account : accounts) {
@@ -59,6 +68,13 @@ public class Main {
         return accountsHashtable;
     }
 
+    public static void displayAccountsHastable(Hashtable<Integer, Account> accountsHashtable) {
+        accountsHashtable.entrySet().stream()
+            .sorted((account1, account2) -> account1.getValue().getBalance().compareTo(account2.getValue().getBalance()))
+            .forEach(System.out::println);
+    }
+
+    // 1.3.4 Creation of the flow array
     public static ArrayList<Flow> generateFlows() {
         ArrayList<Flow> flows = new ArrayList<>();
         
@@ -75,19 +91,5 @@ public class Main {
         } else if (account instanceof SavingsAccount) {
             flows.add(new Credit("Credit of 1500€", 1500.00, account.getAccountNumber(), false, LocalDate.now().plusDays(2)));
         }
-    }
-
-    public static void displayClient(ArrayList<Client> clients) {
-        clients.stream().forEach(System.out::println);
-    }
-
-    public static void displayAccounts(ArrayList<Account> accounts) {
-        accounts.stream().forEach(System.out::println);
-    }
-
-    public static void displayAccountsHastable(Hashtable<Integer, Account> accountsHashtable) {
-        accountsHashtable.entrySet().stream()
-            .sorted((account1, account2) -> account1.getValue().getBalance().compareTo(account2.getValue().getBalance()))
-            .forEach(System.out::println);
     }
 }
