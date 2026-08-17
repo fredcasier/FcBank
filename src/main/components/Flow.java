@@ -13,12 +13,23 @@ public abstract class Flow {
 
     private static Integer flowCount = 1;
 
-    public Flow(String comment, Double amount, Integer targetAccountNumber, Boolean effect, LocalDate flowDate) {
+    public Flow(String comment, Double amount, Integer targetAccountNumber) {
         this.comment = comment;
         this.identifier = Flow.flowCount;
         this.amount = amount;
         this.targetAccountNumber = targetAccountNumber;
-        this.effect = effect;
+        this.effect = true;
+        this.flowDate = LocalDate.now().plusDays(2);
+
+        Flow.flowCount++;
+    }
+
+    public Flow(String comment, Double amount, Integer targetAccountNumber, LocalDate flowDate) {
+        this.comment = comment;
+        this.identifier = Flow.flowCount;
+        this.amount = amount;
+        this.targetAccountNumber = targetAccountNumber;
+        this.effect = true;
         this.flowDate = flowDate;
 
         Flow.flowCount++;
