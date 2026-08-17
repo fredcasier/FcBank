@@ -42,6 +42,10 @@ public class Client {
 
     @Override
     public String toString() {
-        return this.clientNumber + " " + this.name + " " + this.firstName;
+        StringBuilder clientDescription = new StringBuilder();
+        clientDescription.append("Client n°").append(this.clientNumber)
+                .append(" Name: ").append(this.name)
+                .append(" Firstname: ").append(this.firstName);
+        return clientDescription.toString();
     }
 }

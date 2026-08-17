@@ -73,9 +73,11 @@ public abstract class Account {
 
     @Override
     public String toString() {
-        return "Account n°" + this.accountNumber + " = "
-                + "Label: " + this.label + ", "
-                + "Client: " + this.client + ", "
-                + "Balance: " + this.balance;
+        StringBuilder accountDescription = new StringBuilder();
+        accountDescription.append("Account n°").append(this.accountNumber)
+                .append(" = Label: ").append(this.label)
+                .append(", Client: ").append(this.client)
+                .append(", Balance: ").append(this.balance);
+        return accountDescription.toString();
     }
 }
