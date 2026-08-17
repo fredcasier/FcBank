@@ -14,7 +14,15 @@ public abstract class Account {
         this.client = client;
         this.balance = 0.0;
         this.accountNumber = Account.accountsCount;
-        Account.accountsCount ++;
+        Account.accountsCount++;
+    }
+
+    public Account(String label, Client client, Double balance) {
+        this.label = label;
+        this.client = client;
+        this.balance = balance;
+        this.accountNumber = Account.accountsCount;
+        Account.accountsCount++;
     }
 
     public Client getClient() {
@@ -41,19 +49,21 @@ public abstract class Account {
         this.label = label;
     }
 
-
     // 1.3.5 Updating accounts
     public void setBalance(Flow flow) {
-        if (flow instanceof Credit) {
-            this.balance += flow.getAmount();
-        } else if (flow instanceof Debit) {
-            this.balance -= flow.getAmount();
-        } else if (flow instanceof Transfer) {
-            if (flow.getTargetAccountNumber() == this.accountNumber) {
+        if (flow.getEffect()) {
+            if (flow instanceof Credit) {
                 this.balance += flow.getAmount();
-            } else if (((Transfer)flow).getTransferingAccountNumber() == this.accountNumber) {
+            } else if (flow instanceof Debit) {
                 this.balance -= flow.getAmount();
+            } else if (flow instanceof Transfer) {
+                if (flow.getTargetAccountNumber() == this.accountNumber) {
+                    this.balance += flow.getAmount();
+                } else if (((Transfer) flow).getTransferingAccountNumber() == this.accountNumber) {
+                    this.balance -= flow.getAmount();
+                }
             }
+            flow.setEffect(false);
         }
     }
 
@@ -63,9 +73,9 @@ public abstract class Account {
 
     @Override
     public String toString() {
-        return "Account n°" + this.accountNumber + " = " 
-            + "Label: " + this.label + ", " 
-            + "Client: " + this.client + ", " 
-            + "Balance: " + this.balance;
+        return "Account n°" + this.accountNumber + " = "
+                + "Label: " + this.label + ", "
+                + "Client: " + this.client + ", "
+                + "Balance: " + this.balance;
     }
 }

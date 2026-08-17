@@ -80,18 +80,18 @@ public class Main {
     public static ArrayList<Flow> generateFlows() {
         ArrayList<Flow> flows = new ArrayList<>();
         
-        flows.add(new Debit("Debit of 50€", 50.0, 1, false, LocalDate.now().plusDays(2)));
+        flows.add(new Debit("Debit of 50€", 50.0, 1));
         accounts.stream().forEach((accounts) -> flows.add(_generateCreditFlow(accounts)));
-        flows.add(new Transfer("Transfert of 50€ from 1 to 2", 50.00, 2, 1, false, LocalDate.now().plusDays(2)));
+        flows.add(new Transfer("Transfert of 50€ from 1 to 2", 50.00, 2, 1));
 
         return flows;
     }
 
     private static Credit _generateCreditFlow(Account account){
         if (account instanceof CurrentAccount) {
-            return new Credit("Credit of 100.50€", 100.50, account.getAccountNumber(), false, LocalDate.now().plusDays(2));
+            return new Credit("Credit of 100.50€", 100.50, account.getAccountNumber());
         } else if (account instanceof SavingsAccount) {
-            return new Credit("Credit of 1500€", 1500.00, account.getAccountNumber(), false, LocalDate.now().plusDays(2));
+            return new Credit("Credit of 1500€", 1500.00, account.getAccountNumber());
         } else {
             return null;
         }
@@ -111,4 +111,6 @@ public class Main {
 
         hasNegativeAccount.ifPresent(account -> System.out.println("There is an account with a negative balance."));
     }
+
+    // 2.1 JSON file of flows
 }
