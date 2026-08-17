@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Dupont",
+    "firstName": "Jean",
+    "clientNumber": 1
+  },
+  {
+    "name": "Martin",
+    "firstName": "Sophie",
+    "clientNumber": 2
+  },
+  {
+    "name": "Bernard",
+    "firstName": "Thomas",
+    "clientNumber": 3
+  },
+  {
+    "name": "Moreau",
+    "firstName": "Camille",
+    "clientNumber": 4
+  },
+  {
+    "name": "Leroy",
+    "firstName": "Lucas",
+    "clientNumber": 5
+  }
+]

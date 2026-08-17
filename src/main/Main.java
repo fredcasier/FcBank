@@ -1,10 +1,14 @@
 package main;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Optional;
 import java.util.function.Predicate;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import main.components.*;
 
@@ -13,10 +17,13 @@ public class Main {
     static private ArrayList<Account> accounts;
     static private Hashtable<Integer, Account> accountsHashtable;
     static private ArrayList<Flow> flows;
+    
+    static private String jsonPath = "clients.json";
 
     public static void main(String[] args) {
 
-        clients = generateClients(4);
+        // clients = generateClients(4);
+    	clients = jsonToClients(jsonPath);
         accounts = generateAccounts(clients);
         accountsHashtable = genenateAccountHashtable(accounts);
         flows = generateFlows();
@@ -121,4 +128,17 @@ public class Main {
     }
 
     // 2.1 JSON file of flows
+    public static ArrayList<Client> jsonToClients(String pathToFile){
+    	Path path = Path.of(pathToFile);
+    	ArrayList<Client> clients = new ArrayList<Client>();
+    	try {
+			String json = Files.readString(path);
+		
+			Gson gson = new Gson();
+			clients = gson.fromJson(json, new TypeToken<ArrayList<Client>>() {}.getType());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	return clients;
+    }
 }
