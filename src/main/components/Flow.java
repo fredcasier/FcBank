@@ -82,4 +82,22 @@ public abstract class Flow {
     public void setFlowDate(LocalDate flowDate) {
         this.flowDate = flowDate;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder flowDescription = new StringBuilder();
+        flowDescription.append("Flow n°").append(this.identifier)
+                .append(" = Comment: ").append(this.comment)
+                .append(", Amount: ").append(this.amount)
+                .append(", Target account: ").append(this.targetAccountNumber)
+                .append(", Effect: ").append(this.effect ? "to do" : "done")
+                .append(", Flow date: ").append(this.flowDate);
+
+        if (this instanceof Transfer) {
+            flowDescription.append(", Transfering account: ")
+                    .append(((Transfer) this).getTransferingAccountNumber());
+        }
+
+        return flowDescription.toString();
+    }
 }
