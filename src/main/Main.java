@@ -22,10 +22,14 @@ public class Main {
         flows = generateFlows();
         updateAccount(flows, accountsHashtable);
 
-
+        System.out.println("---Clients---");
         displayClient(clients);
+        System.out.println("---Accounts---");
         displayAccounts(accounts);
+        System.out.println("---Accounts Sorted by balance");
         displayAccountsHastable(accountsHashtable);
+        System.out.println("---Flows---");
+        displayFlows(flows);
 
     }
 
@@ -80,21 +84,25 @@ public class Main {
     public static ArrayList<Flow> generateFlows() {
         ArrayList<Flow> flows = new ArrayList<>();
         
-        flows.add(new Debit("Debit of 50€", 50.0, 1));
+        flows.add(new Debit("Debit of 50", 50.0, 1));
         accounts.stream().forEach((accounts) -> flows.add(_generateCreditFlow(accounts)));
-        flows.add(new Transfer("Transfert of 50€ from 1 to 2", 50.00, 2, 1));
+        flows.add(new Transfer("Transfert of 50 from 1 to 2", 50.00, 2, 1));
 
         return flows;
     }
 
     private static Credit _generateCreditFlow(Account account){
         if (account instanceof CurrentAccount) {
-            return new Credit("Credit of 100.50€", 100.50, account.getAccountNumber());
+            return new Credit("Credit of 100.50", 100.50, account.getAccountNumber());
         } else if (account instanceof SavingsAccount) {
-            return new Credit("Credit of 1500€", 1500.00, account.getAccountNumber());
+            return new Credit("Credit of 1500", 1500.00, account.getAccountNumber());
         } else {
             return null;
         }
+    }
+
+    public static void displayFlows(ArrayList<Flow> flows) {
+        flows.stream().forEach(System.out::println);
     }
 
     // 1.3.5 Updating accounts
