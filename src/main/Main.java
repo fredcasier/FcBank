@@ -7,10 +7,9 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Optional;
 import java.util.function.Predicate;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import main.components.*;
 
@@ -141,8 +140,8 @@ public class Main {
     	try {
 			String json = Files.readString(path);
 		
-			Gson gson = new Gson();
-			clients = gson.fromJson(json, new TypeToken<ArrayList<Client>>() {}.getType());
+			ObjectMapper mapper = new ObjectMapper();
+			clients = mapper.readValue(json, new TypeReference<ArrayList<Client>>() {});
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
