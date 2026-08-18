@@ -1,6 +1,20 @@
 package main.components;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 // 1.2.1 Creation of the Account class
+@JsonTypeInfo(
+	    use = JsonTypeInfo.Id.NAME,
+	    include = JsonTypeInfo.As.PROPERTY,
+	    property = "type"
+)
+@JsonSubTypes({
+	    @JsonSubTypes.Type(value = CurrentAccount.class, name = "current"),
+	    @JsonSubTypes.Type(value = SavingsAccount.class, name = "savings")
+})
 public abstract class Account {
     protected String label;
     protected Double balance;
@@ -8,6 +22,8 @@ public abstract class Account {
     protected Client client;
 
     static private Integer accountsCount = 1;
+    
+    public Account() {}
 
     public Account(String label, Client client) {
         this.label = label;
@@ -49,7 +65,14 @@ public abstract class Account {
         this.label = label;
     }
 
+    // Needed for Jackson to set Balance from xml file
+    @JsonProperty("balance")
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+    
     // 1.3.5 Updating accounts
+    @JsonIgnore
     public void setBalance(Flow flow) {
         if (flow.getEffect()) {
             if (flow instanceof Credit) {

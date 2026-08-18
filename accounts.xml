@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<accounts>
+
+    <account type="current">
+        <label>Compte courant Jean Dupont</label>
+        <balance>1250.50</balance>
+        <accountNumber>10001</accountNumber>
+        <client>
+            <name>Dupont</name>
+            <firstName>Jean</firstName>
+            <clientNumber>1</clientNumber>
+        </client>
+    </account>
+
+    <account type="savings">
+        <label>Compte épargne Jean Dupont</label>
+        <balance>5000.00</balance>
+        <accountNumber>20001</accountNumber>
+        <client>
+            <name>Dupont</name>
+            <firstName>Jean</firstName>
+            <clientNumber>1</clientNumber>
+        </client>
+    </account>
+
+    <account type="current">
+        <label>Compte courant Sophie Martin</label>
+        <balance>850.75</balance>
+        <accountNumber>10002</accountNumber>
+        <client>
+            <name>Martin</name>
+            <firstName>Sophie</firstName>
+            <clientNumber>2</clientNumber>
+        </client>
+    </account>
+
+    <account type="savings">
+        <label>Compte épargne Sophie Martin</label>
+        <balance>7250.00</balance>
+        <accountNumber>20002</accountNumber>
+        <client>
+            <name>Martin</name>
+            <firstName>Sophie</firstName>
+            <clientNumber>2</clientNumber>
+        </client>
+    </account>
+
+    <account type="current">
+        <label>Compte courant Thomas Bernard</label>
+        <balance>2340.20</balance>
+        <accountNumber>10003</accountNumber>
+        <client>
+            <name>Bernard</name>
+            <firstName>Thomas</firstName>
+            <clientNumber>3</clientNumber>
+        </client>
+    </account>
+
+    <account type="savings">
+        <label>Compte épargne Thomas Bernard</label>
+        <balance>12500.00</balance>
+        <accountNumber>20003</accountNumber>
+        <client>
+            <name>Bernard</name>
+            <firstName>Thomas</firstName>
+            <clientNumber>3</clientNumber>
+        </client>
+    </account>
+
+    <account type="current">
+        <label>Compte courant Camille Moreau</label>
+        <balance>430.90</balance>
+        <accountNumber>10004</accountNumber>
+        <client>
+            <name>Moreau</name>
+            <firstName>Camille</firstName>
+            <clientNumber>4</clientNumber>
+        </client>
+    </account>
+
+    <account type="savings">
+        <label>Compte épargne Camille Moreau</label>
+        <balance>3400.00</balance>
+        <accountNumber>20004</accountNumber>
+        <client>
+            <name>Moreau</name>
+            <firstName>Camille</firstName>
+            <clientNumber>4</clientNumber>
+        </client>
+    </account>
+
+    <account type="current">
+        <label>Compte courant Lucas Leroy</label>
+        <balance>1780.35</balance>
+        <accountNumber>10005</accountNumber>
+        <client>
+            <name>Leroy</name>
+            <firstName>Lucas</firstName>
+            <clientNumber>5</clientNumber>
+        </client>
+    </account>
+
+    <account type="savings">
+        <label>Compte épargne Lucas Leroy</label>
+        <balance>8900.00</balance>
+        <accountNumber>20005</accountNumber>
+        <client>
+            <name>Leroy</name>
+            <firstName>Lucas</firstName>
+            <clientNumber>5</clientNumber>
+        </client>
+    </account>
+
+</accounts>

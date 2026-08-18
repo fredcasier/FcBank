@@ -9,6 +9,8 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 import main.components.*;
 
@@ -19,12 +21,17 @@ public class Main {
     static private ArrayList<Flow> flows;
     
     static private String jsonPath = "clients.json";
+    static private String xmlPath = "accounts.xml";
 
     public static void main(String[] args) {
 
         // clients = generateClients(4);
     	clients = jsonToClients(jsonPath);
-        accounts = generateAccounts(clients);
+        //accounts = generateAccounts(clients);
+    	accounts = xmlToAccounts(xmlPath);
+    	
+    	System.out.println(accounts);
+    	
         accountsHashtable = genenateAccountHashtable(accounts);
         flows = generateFlows();
         updateAccount(flows, accountsHashtable);
@@ -91,9 +98,9 @@ public class Main {
     public static ArrayList<Flow> generateFlows() {
         ArrayList<Flow> flows = new ArrayList<>();
         
-        flows.add(new Debit("Debit of 50", 50.0, 1));
+        flows.add(new Debit("Debit of 50", 50.0, accounts.get(0).getAccountNumber()));
         accounts.stream().forEach((accounts) -> flows.add(_generateCreditFlow(accounts)));
-        flows.add(new Transfer("Transfert of 50 from 1 to 2", 50.00, 2, 1));
+        flows.add(new Transfer("Transfert of 50 from 1 to 2", 50.00, accounts.get(1).getAccountNumber(), accounts.get(0).getAccountNumber()));
 
         return flows;
     }
@@ -140,5 +147,20 @@ public class Main {
 			e.printStackTrace();
 		}
     	return clients;
+    }
+    
+    // 2.2 XML file of account
+    public static ArrayList<Account> xmlToAccounts(String pathToFile){
+    	Path path = Path.of(pathToFile);
+    	ArrayList<Account> accounts = new ArrayList<Account>();
+    	try {
+    		String xml = Files.readString(path);
+    		XmlMapper mapper = new XmlMapper();
+    		
+    		accounts = mapper.readValue(xml, new TypeReference<ArrayList<Account>>() {});
+    	} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	return accounts;
     }
 }
